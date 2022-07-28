@@ -23,11 +23,23 @@ def create_dicts(lst, csv_file, column_name):
         return lst
 
 def ave_age(lst):
-    pass
     total = 0
     for i in lst:
         total += int(i)
     return str(int((total/len(lst))))
+
+def count_genders(lst):
+    female = 0
+    male = 0
+    for i in lst:
+        if i == 'female':
+            female += 1
+        else:
+            male += 1
+    all = female + male
+    ratio_female = round((female / all), 2) * 100
+    ratio_male = round((male / all), 2) * 100
+    return female, male, ratio_female, ratio_male
     
 def main():
     create_dicts(ages, 'insurance_portfolio_project/insurance.csv', 'age')
@@ -38,6 +50,10 @@ def main():
     create_dicts(region, 'insurance_portfolio_project/insurance.csv', 'region')
     create_dicts(ins_charges, 'insurance_portfolio_project/insurance.csv', 'charges')
 
-    print("The average age is " + ave_age(ages) + ".")
+    print("The average age is " + ave_age(ages) + " years old.")
+    print("There are " + str(count_genders(genders)[0]) + " females and " + str(count_genders(genders)[1])
+        + " males.")
+    print(str(count_genders(genders)[2]) + "% of patients are female and " + str(count_genders(genders)[-1]) +
+        "% are male.")
 
 main()
