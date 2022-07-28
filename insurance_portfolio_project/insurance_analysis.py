@@ -40,6 +40,13 @@ def count_genders(lst):
     ratio_female = round((female / all), 2) * 100
     ratio_male = round((male / all), 2) * 100
     return female, male, ratio_female, ratio_male
+
+def diff_regions(lst):
+    new_regions = []
+    for i in lst:
+        if i not in new_regions:
+            new_regions.append(i)
+    return new_regions
     
 def main():
     create_dicts(ages, 'insurance_portfolio_project/insurance.csv', 'age')
@@ -55,5 +62,8 @@ def main():
         + " males.")
     print(str(count_genders(genders)[2]) + "% of patients are female and " + str(count_genders(genders)[-1]) +
         "% are male.")
+    unique_regions = diff_regions(region)
+    print("The regions served by our insurance company include the " + (', '.join(unique_regions[:-1])) + " and " 
+        + unique_regions[-1] + ".")
 
 main()
