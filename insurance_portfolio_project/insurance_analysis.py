@@ -6,6 +6,7 @@ Purpose:
 """
 
 import csv
+from functools import total_ordering
 
 ages = []
 genders = []
@@ -48,6 +49,12 @@ def diff_regions(lst):
             new_regions.append(i)
     return new_regions
     
+def ave_ins_charges(lst):
+    total_charges = 0
+    for i in lst:
+        total_charges += float(i)
+    return round(total_charges / len(lst), 2)
+
 def main():
     create_dicts(ages, 'insurance_portfolio_project/insurance.csv', 'age')
     create_dicts(genders, 'insurance_portfolio_project/insurance.csv', 'sex')
@@ -65,5 +72,6 @@ def main():
     unique_regions = diff_regions(region)
     print("The regions served by our insurance company include the " + (', '.join(unique_regions[:-1])) + " and " 
         + unique_regions[-1] + ".")
+    print("The average yearly insurance cost is $" + str(ave_ins_charges(ins_charges)) + ".")
 
 main()
