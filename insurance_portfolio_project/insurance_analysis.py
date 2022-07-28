@@ -1,12 +1,11 @@
 """
 Codecademy insurance portfolio project.
 
-Purpose:
+Purpose: To determine different averages of age, gender, bmi, children, smoker status, region, and insurance costs.
 
 """
 
 import csv
-from functools import total_ordering
 
 ages = []
 genders = []
@@ -55,6 +54,35 @@ def ave_ins_charges(lst):
         total_charges += float(i)
     return round(total_charges / len(lst), 2)
 
+def cost_by_region(lst1, lst2):
+    region_cost_lst = list(zip(lst1, lst2))
+    southwest_cost = 0
+    sw_count = 0
+    southeast_cost = 0
+    se_count = 0
+    northwest_cost = 0
+    nw_count = 0
+    northeast_cost = 0
+    ne_count =0
+    for i in region_cost_lst:
+        if i[0] == 'southwest':
+            southwest_cost += float(i[1])
+            sw_count += 1
+        elif i[0] == 'southeast':
+            southeast_cost += float(i[1])
+            se_count += 1
+        elif i[0] == 'northwest':
+            northwest_cost += float(i[1])
+            nw_count += 1
+        elif i[0] == 'northeast':
+            northeast_cost += float(i[1])
+            ne_count += 1
+    ave_southwest = southwest_cost / sw_count
+    ave_southeast = southeast_cost / se_count
+    ave_northwest = northwest_cost / nw_count
+    ave_northeast = northeast_cost / ne_count
+    return round(ave_southwest, 2), round(ave_southeast, 2), round(ave_northwest, 2), round(ave_northeast, 2)
+
 def main():
     create_dicts(ages, 'insurance_portfolio_project/insurance.csv', 'age')
     create_dicts(genders, 'insurance_portfolio_project/insurance.csv', 'sex')
@@ -73,5 +101,13 @@ def main():
     print("The regions served by our insurance company include the " + (', '.join(unique_regions[:-1])) + " and " 
         + unique_regions[-1] + ".")
     print("The average yearly insurance cost is $" + str(ave_ins_charges(ins_charges)) + ".")
+    print("The average cost for each region is: \nSouthwest: $" + str(cost_by_region(region,ins_charges)[0])
+        + "\nSoutheast: $" + str(cost_by_region(region,ins_charges)[1]) + "\nNorthwest: $"
+        + str(cost_by_region(region,ins_charges)[2]) + "\nNortheast: $" + str(cost_by_region(region,ins_charges)[-1]))
+    print("Through this analysis, those living in the Southeast region tend to spend more on insurance.")
+    
+
 
 main()
+
+
