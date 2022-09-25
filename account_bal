@@ -1,0 +1,51 @@
+'''
+This program will calculate an account's balance after earning compound interest, based
+on values inputted from the user.
+'''
+
+def get_principal():
+    principal = float(input("Please enter a principal amount to deposit without any commas: "))
+    if principal <= 0.0:
+        print("Enter a positive amount.")
+        return get_principal()
+    else:
+        return principal
+
+def get_interest():
+    rate = float(input("Please enter an annual interest rate between 2 and 5: "))
+    if rate > 5.0 or rate < 2.0:
+        print("Enter a number between 2.0 and 5.0.")
+        return get_interest()
+    else:
+        return rate*0.01
+
+def get_compound():
+    compound = int(input("Please enter how many times a year your interest will be compounded. Monthly = 12. Quarterly = 4.: "))
+    if compound != 4 and compound != 12:
+        print("Choose monthly or quarterly.")
+        return get_compound()
+    else:
+        return compound
+
+def get_years():
+    years = int(input("Please enter how many years you would like this account to accumulate interest: "))
+    if years <= 0:
+        print("Enter a positive number.")
+        return get_years()
+    else:
+        return years
+
+def main():
+    principal = get_principal()
+    format_principal = "{:,}".format(principal)
+    interest = get_interest()
+    format_int = round(interest*100,2)
+    compound = int(get_compound())
+    years = int(get_years())
+
+    account_balance = round(principal*((1+(interest/compound))**(compound*years)),2)
+    new_bal = "{:,}".format(account_balance)
+
+    print(f"For an account where you deposit ${format_principal}, and earn an annual interest rate of {format_int}% that gets compounded {compound} times per year for {years} years, you will have an ending balance of ${new_bal}.")
+  
+main()
